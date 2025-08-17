@@ -4,10 +4,12 @@
     "description": "A simple Web Services registration and management center",
     "author": "Xiao Bai",
     "license": "MIT",
-    "main": "index.js",
+    "type": "module",
+    "main": "src/index.js",
     "scripts": {
-        "start": "node index.js",
-        "test": "node test.js"
+        "start": "node src/index.js",
+        "test": "node tests/test.js",
+        "example": "node tests/example.js"
     },
     "dependencies": {}
 }

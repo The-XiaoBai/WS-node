@@ -1,17 +1,31 @@
 import http from 'http';
 import https from 'https';
 
+/**
+ * HTTP Client for making HTTP/HTTPS requests
+ * Supports GET, POST, PUT, DELETE methods
+ */
 class HttpClient {
     constructor() {}
 
-    // Parse URL and determine protocol
+    /**
+     * Parse URL and determine protocol
+     * @param {string} url - URL to parse
+     * @returns {Object} - Parsed URL and protocol
+     */
     parseUrl(url) {
         const parsedUrl = new URL(url);
         const protocol = parsedUrl.protocol === 'https:' ? https : http;
         return { parsedUrl, protocol };
     }
 
-    // Build request options
+    /**
+     * Build request options for HTTP request
+     * @param {URL} parsedUrl - Parsed URL object
+     * @param {string} method - HTTP method (GET, POST, PUT, DELETE)
+     * @param {Object} headers - HTTP headers
+     * @returns {Object} - Request options
+     */
     buildRequestOptions(parsedUrl, method = 'GET', headers = {}) {
         return {
             hostname: parsedUrl.hostname,
@@ -25,7 +39,11 @@ class HttpClient {
         };
     }
 
-    // Handle response data
+    /**
+     * Handle HTTP response data
+     * @param {http.IncomingMessage} res - HTTP response object
+     * @returns {Promise<Object>} - Promise resolving to response data
+     */
     handleResponse(res) {
         return new Promise((resolve) => {
             let responseData = '';
@@ -51,7 +69,15 @@ class HttpClient {
         });
     }
 
-    // Main request method
+    /**
+     * Main request method for making HTTP requests
+     * @param {Object} options - Request options
+     * @param {string} options.url - Request URL
+     * @param {string} options.method - HTTP method
+     * @param {Object} options.headers - HTTP headers
+     * @param {*} data - Request body data
+     * @returns {Promise<Object>} - Promise resolving to response
+     */
     request(options, data = null) {
         return new Promise((resolve, reject) => {
             const { parsedUrl, protocol } = this.parseUrl(options.url);
@@ -80,7 +106,12 @@ class HttpClient {
         });
     }
 
-    // GET
+    /**
+     * Make HTTP GET request
+     * @param {string} url - Request URL
+     * @param {Object} options - Additional request options
+     * @returns {Promise<Object>} - Promise resolving to response
+     */
     get(url, options = {}) {
         return this.request({
             url,
@@ -89,7 +120,13 @@ class HttpClient {
         });
     }
 
-    // POST
+    /**
+     * Make HTTP POST request
+     * @param {string} url - Request URL
+     * @param {Object} data - Request body data
+     * @param {Object} options - Additional request options
+     * @returns {Promise<Object>} - Promise resolving to response
+     */
     post(url, data = {}, options = {}) {
         return this.request({
             url,
@@ -98,7 +135,13 @@ class HttpClient {
         }, data);
     }
 
-    // PUT
+    /**
+     * Make HTTP PUT request
+     * @param {string} url - Request URL
+     * @param {Object} data - Request body data
+     * @param {Object} options - Additional request options
+     * @returns {Promise<Object>} - Promise resolving to response
+     */
     put(url, data = {}, options = {}) {
         return this.request({
             url,
@@ -107,7 +150,12 @@ class HttpClient {
         }, data);
     }
 
-    // DELETE
+    /**
+     * Make HTTP DELETE request
+     * @param {string} url - Request URL
+     * @param {Object} options - Additional request options
+     * @returns {Promise<Object>} - Promise resolving to response
+     */
     delete(url, options = {}) {
         return this.request({
             url,
@@ -117,10 +165,5 @@ class HttpClient {
     }
 }
 
-// Create an instance of HttpClient
-const HttpClient = new HttpClient();
-
-// Export instance and methods
-export default HttpClient;
-export const { get, post, put, delete: del } = HttpClient;
 export { HttpClient };
+export default HttpClient;

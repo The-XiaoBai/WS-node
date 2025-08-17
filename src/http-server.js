@@ -1,6 +1,10 @@
 import { createServer } from 'http';
 import { parse } from 'url';
 
+/**
+ * Simple HTTP server implementation
+ * Supports routing for GET, POST, PUT, DELETE methods
+ */
 class HttpServer {
     constructor() {
         this.routes = {
@@ -11,31 +15,55 @@ class HttpServer {
         };
     }
 
-    // GET
+    /**
+     * Register GET route handler
+     * @param {string} path - Route path
+     * @param {Function} handler - Route handler function
+     * @returns {HttpServer} - Returns this for method chaining
+     */
     get(path, handler) {
         this.routes.GET[path] = handler;
         return this;
     }
 
-    // POST
+    /**
+     * Register POST route handler
+     * @param {string} path - Route path
+     * @param {Function} handler - Route handler function
+     * @returns {HttpServer} - Returns this for method chaining
+     */
     post(path, handler) {
         this.routes.POST[path] = handler;
         return this;
     }
 
-    // PUT
+    /**
+     * Register PUT route handler
+     * @param {string} path - Route path
+     * @param {Function} handler - Route handler function
+     * @returns {HttpServer} - Returns this for method chaining
+     */
     put(path, handler) {
         this.routes.PUT[path] = handler;
         return this;
     }
 
-    // DELETE
+    /**
+     * Register DELETE route handler
+     * @param {string} path - Route path
+     * @param {Function} handler - Route handler function
+     * @returns {HttpServer} - Returns this for method chaining
+     */
     delete(path, handler) {
         this.routes.DELETE[path] = handler;
         return this;
     }
 
-    // Parse request body
+    /**
+     * Parse HTTP request body
+     * @param {http.IncomingMessage} req - HTTP request object
+     * @returns {Promise<Object>} - Parsed request body as object
+     */
     async parseBody(req) {
         return new Promise((resolve) => {
             let body = '';
@@ -52,7 +80,12 @@ class HttpServer {
         });
     }
 
-    // Start server
+    /**
+     * Start HTTP server on specified port
+     * @param {number} port - Port to listen on
+     * @param {Function} callback - Callback function called when server starts
+     * @returns {http.Server} - HTTP server instance
+     */
     listen(port, callback) {
         const server = createServer(async (req, res) => {
             const parsedUrl = parse(req.url, true);
@@ -88,4 +121,5 @@ class HttpServer {
     }
 }
 
+export { HttpServer };
 export default HttpServer;
