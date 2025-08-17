@@ -1,0 +1,5 @@
+[v1.0.1]
+Support for heartbeat monitoring.
+
+[v1.0.2]
+Support for authentication.
