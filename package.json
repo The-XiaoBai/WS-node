@@ -1,0 +1,13 @@
+{
+    "name": "ws-node",
+    "version": "1.0.0",
+    "description": "A simple Web Services registration and management center",
+    "author": "Xiao Bai",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "node test.js"
+    },
+    "dependencies": {}
+}

@@ -1,2 +1,9 @@
 # WS-node
-A simple Web Services registration and management center, using the MIT license.
+
+## Description
+
+WS-Node is a lightweight Web services registration and management system built using node.js
+
+## License
+
+The code is distributed under the [MIT license](LICENSE).
